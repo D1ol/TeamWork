@@ -1,0 +1,171 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ user.name }} {{ user.surname }}{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/node_modules/cropper/cropper.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/node_modules/sweetalert/sweetalert.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('assets/dist/css/pages/contact-app-page.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('assets/dist/css/style.min.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    {{ dump() }}
+
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h4 class="text-themecolor">Profile</h4>
+        </div>
+        <div class="col-md-7 align-self-center text-right">
+            <div class="d-flex justify-content-end align-items-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ path('dashboard') }}">Home</a></li>
+                    <li class="breadcrumb-item active">{{ user.name }} {{ user.surname }}</li>
+                </ol>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Column -->
+        <div class="col-lg-4 col-xlg-3 col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <center class="m-t-30">
+                        {% if user.photo != null %}
+                            <img src="{{ asset('uploads/avatar/'~user.name~'/'~user.photo) }}" class="img-circle" width="150" height="150">
+                        {% else %}
+                            <img src="{{ asset('uploads/avatar/default.jpg') }}" class="img-circle" width="150">
+                        {% endif %}
+                        <h4 class="card-title m-t-10">{{ user.name }} {{ user.surname }}</h4>
+                        <h6 class="card-subtitle">Accoubts Manager Amix corp</h6>
+                        <div class="row text-center justify-content-md-center">
+                            <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-people"></i> <font class="font-medium">254</font></a></div>
+                            <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-picture"></i> <font class="font-medium">54</font></a></div>
+                        </div>
+                    </center>
+                </div>
+                <div>
+                    <hr> </div>
+                <div class="card-body"> <small class="text-muted">Email address </small>
+                    <h6>{{user.email}}</h6> <small class="text-muted p-t-30 db">Phone</small>
+                    <h6>{{user.phone}}</h6>
+                </div>
+            </div>
+        </div>
+        <!-- Column -->
+        <!-- Column -->
+        <div class="col-lg-8 col-xlg-9 col-md-7">
+            <div class="card">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs profile-tab" role="tablist">
+
+                    <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#settings" role="tab">Settings</a> </li>
+                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#photo" role="tab">Photo</a> </li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <!--second tab-->
+                    <div class="tab-pane active" id="settings" role="tabpanel">
+                        <div class="card-body">
+                            {{ form_start(form, {'attr':{'class':'form-horizontal form-material'}}) }}
+                            <div class="form-group">
+                                {{ form_label(form.name) }}
+                                {{ form_errors(form.name) }}
+                                <div class="col-md-12">
+                                {{ form_widget(form.name) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.surname) }}
+                                {{ form_errors(form.surname) }}
+                                <div class="col-md-12">
+                                {{ form_widget(form.surname) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.email) }}
+                                {{ form_errors(form.email) }}
+                                <div class="col-md-12">
+                                {{ form_widget(form.email) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.phone) }}
+                                {{ form_errors(form.phone) }}
+                                <div class="col-md-12">
+                                {{ form_widget(form.phone) }}
+                                </div>
+                            </div>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="photo" role="tabpanel">
+                        <div class="card-body">
+                            {{ form_start(formPhoto, {'attr':{'class':'form-horizontal form-material'}}) }}
+                            <div class="form-group">
+                                {{ form_label(formPhoto.userFile) }}
+                                {{ form_errors(formPhoto.userFile) }}
+                                {{ form_widget(formPhoto.userFile) }}
+                            </div>
+                            {{ form_end(formPhoto) }}
+                            </div>
+
+                                <!-- /.btn groups -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <!-- Column -->
+
+    <!-- Row -->
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/node_modules/cropper/cropper.min.js') }}"></script>
+    <script src="{{ asset('assets/node_modules/dropify/dist/js/dropify.min.js') }}"></script>
+    <script src="{{ asset('assets/node_modules/sweetalert/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('assets/node_modules/sweetalert/jquery.sweet-alert.custom.js') }}"></script>
+    <script src="{{ asset('assets/dist/js/custom.min.js') }}"></script>
+    <script>
+        {% for flash in app.session.flashBag.get('success') %}
+        swal({
+            title: "new user!",
+            text: "{{ flash }}",
+            type: "success",
+            timer: 5000,
+        });
+        {% endfor %}
+        {% for flash in app.session.flashBag.get('error') %}
+        swal({
+            title: "error!",
+            text: "{{ flash }}",
+            type: "error",
+            timer: 5000,
+        });
+        {% endfor %}
+
+        $(document).ready(function() {
+
+            var drEvent = $('.dropify').dropify({
+                    "showRemove": false,
+                    "messages": {
+                        default: 'Drag and drop a file here or click',
+                        replace: 'Drag and drop or click to replace',
+                        remove: 'Remove',
+                        error: 'Ooops, something wrong appended.'
+                    }
+                }
+            );
+            drEvent.on('dropify.errors', function (event, element) {
+                alert('Has Errors!');
+            });
+        });
+
+    </script>
+{% endblock %}

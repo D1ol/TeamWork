@@ -1,0 +1,359 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- Tell the browser to be responsive to screen width -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="yellowsPL">
+        <!-- Favicon icon -->
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/icon/icon3.png') }}">
+        <title>{% block title %}{% endblock %}</title>
+        <!-- Custom CSS -->
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+
+        {% block stylesheets %}{% endblock %}
+        <link href="{{ asset('assets/dist/css/style.min.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('assets/node_modules/dropify/dist/css/dropify.min.css') }}">
+
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <style>
+            @media (min-width: 1024px) {
+                .footer, .page-wrapper {
+                    margin-left: 200px;
+                }
+            }
+
+
+            @media (min-width: 768px) {
+                .navbar-header {
+                    width: 200px;
+                    flex-shrink: 0;
+                }
+            }
+
+            .left-sidebar {
+                width: 200px;
+            }
+
+            .sidebar-nav ul li a {
+                font-size: 12px;
+            }
+
+            .sidebar-nav>ul>li {
+                margin-bottom: 0px;
+                margin-top: 0px;
+            }
+
+            .mini-sidebar .sidebar-nav #sidebarnav > li > a {
+                height: 48px;
+            }
+        </style>
+    </head>
+
+    <body class="skin-default-dark logo-center fixed-layout">
+        {% block pageloadder %}
+            <div class="preloader">
+                <div class="loader">
+                    <div class="loader__figure"></div>
+                    <p class="loader__label">TeamWork</p>
+                </div>
+            </div>
+        {% endblock %}
+
+        <div id="main-wrapper">
+            <!-- ============================================================== -->
+            <!-- Topbar header - style you can find in pages.scss -->
+            <!-- ============================================================== -->
+            {% block header %}
+            <header class="topbar">
+                <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                    <!-- ============================================================== -->
+                    <!-- Logo -->
+                    <!-- ============================================================== -->
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="{{ path('dashboard') }}">
+                            <b>
+                                <img src="{{ asset('assets/images/logo-light-icon.png') }}"  alt="homepage" class="light-logo" />
+                                <img src="{{ asset('assets/images/logo-icon.png') }}" alt="Home" class="dark-logo"/>
+                            </b>
+                            <span>
+                                <img src="{{  asset('assets/images/logo-light-text.png') }}"  alt="homepage" class="light-logo" />
+                                <img src="{{ asset('assets/images/logo-icon.png') }} }}" class="dark-logo" alt="homepage" />
+                            </span>
+                        </a>
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- End Logo -->
+                    <!-- ============================================================== -->
+                    <div class="navbar-collapse">
+                        <!-- ============================================================== -->
+                        <!-- toggle and nav items -->
+                        <!-- ============================================================== -->
+                        <ul class="navbar-nav mr-auto">
+                            <!-- This is  -->
+                            <li class="nav-item"> <a class="nav-link nav-toggler d-block d-md-none waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                            <li class="nav-item"> <a class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark" href="javascript:void(0)"><i class="icon-menu"></i></a> </li>
+
+                        </ul>
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                        <ul class="navbar-nav my-lg-0">
+                            <!-- ============================================================== -->
+                            <!-- Comment -->
+                            <!-- ============================================================== -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="ti-email"></i>
+                                    <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown">
+                                    <ul>
+                                        <li>
+                                            <div class="drop-title">Notifications</div>
+                                        </li>
+                                        <li>
+                                            <div class="message-center">
+                                                <!-- Message -->
+                                                <a href="javascript:void(0)">
+                                                    <div class="btn btn-danger btn-circle"><i class="fa fa-link"></i></div>
+                                                    <div class="mail-contnet">
+                                                        <h5>Luanch Admin</h5> <span class="mail-desc">Just see the my new admin!</span> <span class="time">9:30 AM</span> </div>
+                                                </a>
+                                                <!-- Message -->
+                                                <a href="javascript:void(0)">
+                                                    <div class="btn btn-success btn-circle"><i class="ti-calendar"></i></div>
+                                                    <div class="mail-contnet">
+                                                        <h5>Event today</h5> <span class="mail-desc">Just a reminder that you have event</span> <span class="time">9:10 AM</span> </div>
+                                                </a>
+                                                <!-- Message -->
+                                                <a href="javascript:void(0)">
+                                                    <div class="btn btn-info btn-circle"><i class="ti-settings"></i></div>
+                                                    <div class="mail-contnet">
+                                                        <h5>Settings</h5> <span class="mail-desc">You can customize this template as you want</span> <span class="time">9:08 AM</span> </div>
+                                                </a>
+                                                <!-- Message -->
+                                                <a href="javascript:void(0)">
+                                                    <div class="btn btn-primary btn-circle"><i class="ti-user"></i></div>
+                                                    <div class="mail-contnet">
+                                                        <h5>Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </div>
+                                                </a>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <a class="nav-link text-center link" href="javascript:void(0);"> <strong>Check all notifications</strong> <i class="fa fa-angle-right"></i> </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <!-- ============================================================== -->
+                            <!-- End Comment -->
+                            <!-- ============================================================== -->
+                            <!-- ============================================================== -->
+                            <!-- Messages -->
+                            <!-- ============================================================== -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="icon-note"></i>
+                                    <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
+                                </a>
+                                <div class="dropdown-menu mailbox dropdown-menu-right animated bounceInDown" aria-labelledby="2">
+                                    <ul>
+                                        <li>
+                                            <div class="drop-title">You have 4 new messages</div>
+                                        </li>
+                                        <li>
+                                            <div class="message-center">
+                                                <!-- Message -->
+                                                <a href="javascript:void(0)">
+                                                    <div class="user-img"> <img src="{{ asset('assets/images/users/1.jpg') }}" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
+                                                    <div class="mail-contnet">
+                                                        <h5>Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:30 AM</span> </div>
+                                                </a>
+                                                <!-- Message -->
+                                                <a href="javascript:void(0)">
+                                                    <div class="user-img"> <img src="{{ asset('assets/images/users/2.jpg') }}" alt="user" class="img-circle"> <span class="profile-status busy pull-right"></span> </div>
+                                                    <div class="mail-contnet">
+                                                        <h5>Sonu Nigam</h5> <span class="mail-desc">I've sung a song! See you at</span> <span class="time">9:10 AM</span> </div>
+                                                </a>
+                                                <!-- Message -->
+                                                <a href="javascript:void(0)">
+                                                    <div class="user-img"> <img src="{{ asset('assets/images/users/3.jpg') }}" alt="user" class="img-circle"> <span class="profile-status away pull-right"></span> </div>
+                                                    <div class="mail-contnet">
+                                                        <h5>Arijit Sinh</h5> <span class="mail-desc">I am a singer!</span> <span class="time">9:08 AM</span> </div>
+                                                </a>
+                                                <!-- Message -->
+                                                <a href="javascript:void(0)">
+                                                    <div class="user-img"> <img src="{{ asset('assets/images/users/4.jpg') }}" alt="user" class="img-circle"> <span class="profile-status offline pull-right"></span> </div>
+                                                    <div class="mail-contnet">
+                                                        <h5>Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </div>
+                                                </a>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <a class="nav-link text-center link" href="javascript:void(0);"> <strong>See all e-Mails</strong> <i class="fa fa-angle-right"></i> </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <!-- ============================================================== -->
+                            <!-- End Messages -->
+                            <!-- ============================================================== -->
+
+                            <!-- ============================================================== -->
+                            <!-- User Profile -->
+                            <!-- ============================================================== -->
+                            <li class="nav-item dropdown u-pro">
+                                <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="hidden-md-down"><i class="flag-icon flag-icon-gb" title="gb" id="gb"></i></span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right animated flipInY">
+                                    <!-- text-->
+                                    <a href="javascript:void(0)" class="dropdown-item"><i class="flag-icon flag-icon-gb" title="gb" id="gb"></i> en</a>
+                                    <a href="javascript:void(0)" class="dropdown-item"><i class="flag-icon flag-icon-pl" title="pl" id="pl"></i> pl</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown u-pro">
+{#                                <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
+{#                                    {% if app.user.photo != null %}#}
+{#                                        <img src="{{ asset('uploads/avatar/'~app.user.id~'/'~app.user.photo) }}" alt="user" class="">#}
+{#                                    {% else %}#}
+{#                                        <img src="{{ asset('uploads/avatar/default.jpg') }}" alt="user" class="">#}
+{#                                    {% endif %}#}
+{#                                    <span class="hidden-md-down">{{ app.user.name }} {{ app.user.surname }} <i class="fa fa-angle-down"></i></span>#}
+{#                                </a>#}
+                                <div class="dropdown-menu dropdown-menu-right animated flipInY">
+                                    <!-- text-->
+{#                                    <a href="{{ path('users_show',{'tenant':app.user.tenant.name, 'userId':app.user.id}) }}" class="dropdown-item"><i class="ti-user"></i> My Profile</a>#}
+                                    <!-- text-->
+                                    <a href="javascript:void(0)" class="dropdown-item"><i class="ti-wallet"></i> My Balance</a>
+                                    <!-- text-->
+                                    <a href="javascript:void(0)" class="dropdown-item"><i class="ti-email"></i> Inbox</a>
+                                    <!-- text-->
+                                    <div class="dropdown-divider"></div>
+                                    <!-- text-->
+                                    <a href="javascript:void(0)" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
+                                    <!-- text-->
+                                    <div class="dropdown-divider"></div>
+                                    <!-- text-->
+                                    <a href="{{ path('logout') }}" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
+                                    <!-- text-->
+                                </div>
+                            </li>
+                            <!-- ============================================================== -->
+                            <!-- End User Profile -->
+                            <!-- ============================================================== -->
+                            <li class="nav-item right-side-toggle"> <a class="nav-link  waves-effect waves-light" href="javascript:void(0)"><i class="ti-settings"></i></a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            {% endblock %}
+            <!-- ============================================================== -->
+            <!-- End Topbar header -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Left Sidebar - style you can find in sidebar.scss  -->
+            <!-- ============================================================== -->
+            {% block sidebar %}
+                <aside class="left-sidebar">
+                    <!-- Sidebar scroll-->
+                    <div class="scroll-sidebar">
+                        <!-- Sidebar navigation-->
+                        <nav class="sidebar-nav">
+                            <ul id="sidebarnav">
+                                <li><a class="waves-effect waves-dark" href="#" aria-expanded="false">
+                                        <i class="icon-home"></i>
+                                        <span class="hide-menu">
+                                           Strona główna</span></a>
+                                </li>
+
+                                <li class="{% block menu_tasks %}{% endblock %}"><a class="waves-effect waves-dark" href="{{ path('task_add')}}" aria-expanded="false">
+                                        <i class="icon-home"></i>
+                                        <span class="hide-menu">
+                                          Zadania</span></a>
+                                </li>
+                                <li>
+
+                                <li class="{% block menu_projects %}{% endblock %}"><a class="waves-effect waves-dark" href="{{ path('projects_index')}}" aria-expanded="false">
+                                        <i class="icon-home"></i>
+                                        <span class="hide-menu">
+                                           Projekty</span></a>
+                                </li>
+                                <li>
+
+                                <li class="{% block menu_clients %}{% endblock %}"><a href="{{ path('clients_index') }}" class="waves-effect waves-dark"  aria-expanded="false">
+                                        <i class="icon-home"></i>
+                                        <span class="hide-menu">
+                                           Klienci</span></a>
+                                </li>
+                                <li>
+
+                                <li class="{% block menu_team %}{% endblock %}"><a href="{{path('users_index')}}" class="waves-effect waves-dark"  aria-expanded="false">
+                                        <i class="icon-home"></i>
+                                        <span class="hide-menu">
+                                           Zespol</span></a>
+                                </li>
+
+                            </ul>
+                        </nav>
+                        <!-- End Sidebar navigation -->
+                    </div>
+                    <!-- End Sidebar scroll-->
+                </aside>
+            {% endblock %}
+            <!-- ============================================================== -->
+            <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Page wrapper  -->
+            <!-- ============================================================== -->
+            <div class="page-wrapper">
+                <!-- ============================================================== -->
+                <!-- Container fluid  -->
+                <!-- ============================================================== -->
+                <div class="container-fluid">
+                    {% block body %}{% endblock %}
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Container fluid  -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Page wrapper  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            {% block footer %}
+                <footer class="footer">
+                    © 2019 TeamWork
+                </footer>
+            {% endblock %}
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+
+        <script src="{{ asset('assets/node_modules/jquery/jquery-3.2.1.min.js') }}"></script>
+        <!-- Bootstrap tether Core JavaScript -->
+        <script src="{{ asset('assets/node_modules/popper/popper.min.js') }}"></script>
+        <script src="{{ asset('assets/node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+        <!-- slimscrollbar scrollbar JavaScript -->
+        <script src="{{ asset('assets/dist/js/perfect-scrollbar.jquery.min.js') }}"></script>
+        <!--Wave Effects -->
+        <script src="{{ asset('assets/dist/js/waves.js') }}"></script>
+        <!--Menu sidebar -->
+        <script src="{{ asset('assets/dist/js/sidebarmenu.js') }}"></script>
+        <!--stickey kit -->
+        <script src="{{ asset('assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js') }}"></script>
+        <script src="{{ asset('assets/node_modules/sparkline/jquery.sparkline.min.js') }}"></script>
+        <!--Custom JavaScript -->
+        <script src="{{ asset('assets/dist/js/custom.min.js') }}"></script>
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

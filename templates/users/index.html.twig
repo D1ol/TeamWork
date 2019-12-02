@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New client{% endblock %}
+
+{% block menu_team %}active{% endblock %}
+{% block stylesheets %}
+
+    <link href="{{ asset('assets/node_modules/sweetalert/sweetalert.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('assets/dist/css/pages/user-card.css') }}" rel="stylesheet" type="text/css">
+
+
+{% endblock %}
+
+{% block body %}
+    {{ dump() }}
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center">
+        <h4 class="text-themecolor">Our Team</h4>
+    </div>
+    <div class="col-md-7 align-self-center text-right">
+        <div class="d-flex justify-content-end align-items-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('dashboard') }}">Home</a></li>
+                <li class="breadcrumb-item active">Users</li>
+            </ol>
+            <a href="{{ path('user_add') }}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Create User</a>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<!-- .row -->
+<div class="row">
+   {% for user in users %}
+    <div class="col-md-6 col-lg-6 col-xlg-4">
+        <div class="card card-body">
+            <div class="row align-items-center">
+                <div class="col-md-4 col-lg-3 text-center">
+                    <a href="{{path('user_show',{'userID':user.id})}}">
+                        {% if user.photo != null %}
+                            <img src="{{ asset('uploads/avatar/'~user.name~'/'~user.photo) }}" class="img-circle" width="150" height="150" >
+                        {% else %}
+                            <img src="{{ asset('uploads/avatar/default.jpg') }}" class="img-circle img" width="150" height="150">
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="col-md-8 col-lg-9">
+                    <h3 class="box-title m-b-0">{{user.name}} {{ user.surname }}</h3>
+                    <address>
+                        <br/>
+                        Role:
+                        {{ user.role[0] }}
+                        <br/>
+                        <br/>
+                        <div class="el-card-content">
+                            <h3 class="box-title">{{user.email}}</h3>
+                            <small>
+                                <abbr title="Phone">Telephone:</abbr> +48{{user.phone}}</small>
+                            <br/></div>
+
+                    </address>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/node_modules/sweetalert/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('assets/node_modules/sweetalert/jquery.sweet-alert.custom.js') }}"></script>
+    <script>
+        {% for flash in app.session.flashBag.get('success') %}
+        swal({
+            title: "new user!",
+            text: "{{ flash }}",
+            type: "success",
+            timer: 5000,
+        });
+        {% endfor %}
+        {% for flash in app.session.flashBag.get('error') %}
+        swal({
+            title: "error!",
+            text: "{{ flash }}",
+            type: "error",
+            timer: 5000,
+        });
+        {% endfor %}
+    </script>
+{% endblock %}

@@ -1,0 +1,103 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: 'en'
+    client_file_dir: '%kernel.root_dir%/../public/uploads/clients/'
+    user_file_dir: '%kernel.root_dir%/../public/uploads/avatar/'
+
+
+
+services:
+    # default configuration for services in *this* file
+    #    _defaults:
+    #        autowire: true      # Automatically injects dependencies in your services.
+    #        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/*'
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    App\Controller\:
+        resource: '../src/Controller'
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        tags: ['controller.service_arguments']
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+    doctrine_application_transaction:
+        class: App\Adapter\Core\Transaction
+        arguments: ["@doctrine.orm.entity_manager"]
+        public: true
+
+    application_transaction:
+        alias: doctrine_application_transaction
+        public: true
+
+    Users:
+        class: App\Adapter\Users\Users
+        arguments: ["@doctrine.orm.entity_manager"]
+        public: true
+
+    Clients:
+        class: App\Adapter\Clients\Clients
+        arguments: ["@doctrine.orm.entity_manager"]
+        public: true
+
+    Projects:
+        class: App\Adapter\Projects\Projects
+        arguments: ["@doctrine.orm.entity_manager"]
+        public: true
+
+    Tasks:
+        class: App\Adapter\Tasks\Tasks
+        arguments: ["@doctrine.orm.entity_manager"]
+        public: true
+
+    App\Entity\Clients\UseCase\CreateClient:
+        arguments: ["@Clients","@application_transaction"]
+        public: true
+
+    App\Entity\Users\UseCase\CreateUser:
+        arguments: ["@Users","@application_transaction"]
+        public: true
+
+    App\Entity\Users\UseCase\EditUser:
+        arguments: ["@Users","@application_transaction"]
+        public: true
+
+    App\Entity\Users\UseCase\ChangePhoto:
+        arguments: ["@Users","@application_transaction"]
+        public: true
+
+    App\Entity\Projects\UseCase\CreateProject:
+        arguments: ["@Projects","@application_transaction"]
+        public: true
+
+    App\Entity\Tasks\UseCase\CreateTask:
+        arguments: ["@Tasks","@application_transaction"]
+        public: true
+
+#    read_model.clients_query:
+#        class: App\Adapter\Clients\ReadModel
+#        arguments: ["@database_connection"]
+#        public: true
+#
+#    read_model.users_query:
+#        class: App\Adapter\Users\ReadModel\
+#        arguments: ["@database_connection"]
+#        public: true
+#
+#    read_model.projects_query:
+#        class: App\Adapter\Projects\ReadModel
+#        arguments: ["@database_connection"]
+#        public: true

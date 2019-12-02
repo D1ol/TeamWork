@@ -1,0 +1,15 @@
+.space-beetween{
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+}
+
+.hide-second{
+    display: none;
+}

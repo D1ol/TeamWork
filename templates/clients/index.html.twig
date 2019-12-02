@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New client{% endblock %}
+
+{% block menu_clients %}active{% endblock %}
+{% block stylesheets %}
+
+    <link href="{{ asset('assets/node_modules/sweetalert/sweetalert.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('assets/dist/css/pages/user-card.css') }}" rel="stylesheet" type="text/css">
+
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h4 class="text-themecolor">Our clients</h4>
+        </div>
+        <div class="col-md-7 align-self-center text-right">
+            <div class="d-flex justify-content-end align-items-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ path('dashboard') }}">Home</a></li>
+                    <li class="breadcrumb-item active">New</li>
+                </ol>
+                <a href="{{ path('client_add') }}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Create Client</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row el-element-overlay">
+        <div class="col-md-12">
+{#            {{ dump() }}#}
+
+{#            <h4 class="card-title">Our clients</h4>#}
+{#            <h6 class="card-subtitle m-b-20 text-muted">Click to show</h6>#}
+        </div>
+        {% for client in clients %}
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="el-card-item">
+                    <div class="el-card-avatar el-overlay-1"><img src="{{ asset('uploads/clients/'~client.name~'/'~client.photo) }}" alt="user"/>
+                        <div class="el-overlay">
+                            <ul class="el-info">
+                                <li><a class="btn default btn-outline image-popup-vertical-fit"
+                                       href="{{ asset('uploads/clients/'~client.name~'/'~client.photo) }}"><i class="icon-magnifier"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="el-card-content">
+                        <h3 class="box-title">{{client.name}}</h3>
+                        <i class="mdi mdi-checkbox-blank-circle vertical-middle" style="color: {{ client.color }}"></i>
+                        <small>
+                           Client color</small>
+                        <br/></div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/node_modules/sweetalert/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('assets/node_modules/sweetalert/jquery.sweet-alert.custom.js') }}"></script>
+    <script>
+        {% for flash in app.session.flashBag.get('success') %}
+        swal({
+            title: "new user!",
+            text: "{{ flash }}",
+            type: "success",
+            timer: 5000,
+        });
+        {% endfor %}
+        {% for flash in app.session.flashBag.get('error') %}
+        swal({
+            title: "error!",
+            text: "{{ flash }}",
+            type: "error",
+            timer: 5000,
+        });
+        {% endfor %}
+    </script>
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New client{% endblock %}
+
+{% block menu_clients %}active{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/node_modules/dropify/dist/css/dropify.min.css') }}">
+    <link href="{{ asset('assets/node_modules/sweetalert/sweetalert.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('assets/node_modules/jquery-asColorPicker-master/dist/css/asColorPicker.css') }}" rel="stylesheet">
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h4 class="text-themecolor">New user</h4>
+        </div>
+        <div class="col-md-7 align-self-center text-right">
+            <div class="d-flex justify-content-end align-items-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ path('dashboard') }}">Home</a></li>
+                    <li class="breadcrumb-item active">New</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="offset-3 col-6">
+            <div class="card">
+                <div class="card-body">
+                    {{ form_start(form,{'attr':{'class': 'form-control-line'}}) }}
+                    <div class="form-group">
+                        {{ form_label(form.name) }}
+                        {{ form_errors(form.name) }}
+                        {{ form_widget(form.name) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.color) }}
+                        {{ form_errors(form.color) }}
+                        {{ form_widget(form.color) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.clientFile) }}
+                        {{ form_errors(form.clientFile) }}
+                        {{ form_widget(form.clientFile) }}
+                    </div>
+
+                    {{ form_end(form) }}
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/node_modules/dropify/dist/js/dropify.min.js') }}"></script>
+    <script src="{{ asset('assets/node_modules/sweetalert/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('assets/node_modules/jquery-asColor/dist/jquery-asColor.js') }}"></script>
+    <script src="{{ asset('assets/node_modules/jquery-asGradient/dist/jquery-asGradient.js') }}"></script>
+    <script src="{{ asset('assets/node_modules/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js') }}"></script>
+    <script src="{{ asset('assets/node_modules/sweetalert/jquery.sweet-alert.custom.js') }}"></script>
+    <script>
+        {% for flash in app.session.flashBag.get('success') %}
+        swal({
+            title: "new user!",
+            text: "{{ flash }}",
+            type: "success",
+            timer: 5000,
+        });
+        {% endfor %}
+        {% for flash in app.session.flashBag.get('error') %}
+        swal({
+            title: "error!",
+            text: "{{ flash }}",
+            type: "error",
+            timer: 5000,
+        });
+        {% endfor %}
+
+        $(document).ready(function() {
+
+            var drEvent = $('.dropify').dropify({
+                    "showRemove": false,
+                    "messages": {
+                        default: 'Drag and drop a file here or click',
+                        replace: 'Drag and drop or click to replace',
+                        remove: 'Remove',
+                        error: 'Ooops, something wrong appended.'
+                    }
+                }
+            );
+            drEvent.on('dropify.errors', function (event, element) {
+                alert('Has Errors!');
+            });
+            $(".colorpicker").asColorPicker();
+        });
+    </script>
+{% endblock %}
