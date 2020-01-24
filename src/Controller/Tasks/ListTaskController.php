@@ -11,7 +11,7 @@ use App\Form\Tasks\AddTaskType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CreateTaskController extends AdvancedAbstractController implements CreateTaskResponder
+class CreateTaskController extends AdvancedAbstractController
 {
     /**
      * @Route("/tasks/add", name="task_add", methods={"GET"})
@@ -19,32 +19,17 @@ class CreateTaskController extends AdvancedAbstractController implements CreateT
      */
     public function addAction(Request $request)
     {
+        $task = $this->get('Tasks')->findOneByUserAndDateEndNull($this->getUser()->getId());
         $form = $this->createForm(
             AddTaskType::class,
-            [],
+            $task ? $this->getTaskFromObjectToArray($task) : null,
             [
                 'method' => 'POST',
                 'action' => $this->generateUrl('task_create')
             ]
         );
-
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
 
-            $command = new CreateTask\Command(
-                $data['description'],
-                $this->getUser(),
-                $data['project']
-
-            );
-            $command->setResponder($this);
-
-            $createTask= $this->get('use_case.create_task');
-            $createTask->execute($command);
-
-            return $this->redirectToRoute('task_add');
-        }
 
         return $this->render('tasks/add.html.twig', [
             'form' => $form->createView()
@@ -52,8 +37,12 @@ class CreateTaskController extends AdvancedAbstractController implements CreateT
 
     }
 
-    public function taskCreated(Task $task)
+    public function getTaskFromObjectToArray(Task $task)
     {
-        $this->addFlash('success', 'Task with id: '.$task->getId().' created');
+        return [
+            'description' => $task->getDescription(),
+            'project' => $task->getIdProject()
+        ];
     }
+
 }
