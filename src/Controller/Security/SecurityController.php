@@ -27,13 +27,10 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/dashboard", name="dashboard")
+     * @Route("/", name="dashboard")
      */
     public function dashhboard()
     {
-
-
-
         return $this->render('security/dashboard.html.twig', []);
     }
 

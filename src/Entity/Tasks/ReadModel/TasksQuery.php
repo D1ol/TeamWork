@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Entity\Tasks\ReadModel;
+namespace App\Entity\Tasks\ReadModel;
 
 
-class TasksQuery
+interface TasksQuery
 {
-
+    public function getAllCompletedTasksByUserID(string $userID);
 }

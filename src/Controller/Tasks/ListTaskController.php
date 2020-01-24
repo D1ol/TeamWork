@@ -11,28 +11,32 @@ use App\Form\Tasks\AddTaskType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CreateTaskController extends AdvancedAbstractController
+/**
+ * Class ListTaskController
+ * @package App\Controller\Tasks
+ * @Route("/tasks")
+ */
+class ListTaskController extends AdvancedAbstractController
 {
     /**
-     * @Route("/tasks/add", name="task_add", methods={"GET"})
-     * @Route("/tasks/create", name="task_create", methods={"POST"})
+     * @Route("/", name="task_add", methods={"GET"})
      */
     public function addAction(Request $request)
     {
         $task = $this->get('Tasks')->findOneByUserAndDateEndNull($this->getUser()->getId());
+
+        $userTasks = $this->get('read_model.tasks_query')->getAllCompletedTasksByUserID($this->getUser()->getId());
         $form = $this->createForm(
             AddTaskType::class,
-            $task ? $this->getTaskFromObjectToArray($task) : null,
-            [
-                'method' => 'POST',
-                'action' => $this->generateUrl('task_create')
-            ]
+            $task ? $this->getTaskFromObjectToArray($task) : null
         );
         $form->handleRequest($request);
 
 
         return $this->render('tasks/add.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'task' => $task,
+            'userTasks' => $userTasks
         ]);
 
     }
@@ -41,7 +45,8 @@ class CreateTaskController extends AdvancedAbstractController
     {
         return [
             'description' => $task->getDescription(),
-            'project' => $task->getIdProject()
+            'project' => $task->getIdProject(),
+            'dateStart' => $task->getDateStart()
         ];
     }
 

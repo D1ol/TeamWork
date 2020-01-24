@@ -84,8 +84,22 @@ services:
         public: true
 
     App\Entity\Tasks\UseCase\CreateTask:
-        arguments: ["@Tasks","@application_transaction"]
+        arguments:
+            - "@Tasks"
+            - "@Projects"
+            - "@application_transaction"
         public: true
+
+    App\Entity\Tasks\UseCase\EditTask:
+        arguments:
+            - "@Tasks"
+            - "@Projects"
+            - "@application_transaction"
+        public: true
+
+    TasksQuery:
+        class: App\Adapter\Tasks\ReadModel\TasksQuery
+        arguments: ["@doctrine.dbal.default_connection"]
 
 #    read_model.clients_query:
 #        class: App\Adapter\Clients\ReadModel

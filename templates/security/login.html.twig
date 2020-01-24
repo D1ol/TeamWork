@@ -7,11 +7,11 @@
 {% endblock %}
 
 {% block body %}
-    <section id="wrapper" class="login-register" style="background-image:url({{ asset('assets/images/background/logowanie.png') }});">
+    <section id="wrapper" class="login-register" style="background-image:url({{ asset('assets/images/background/login-register.jpg') }});">
         <div class="login-box card">
             <div class="card-body">
                 <form class="form-horizontal form-material text-center" id="loginform" method="POST">
-                    <a href="javascript:void(0)" class="db"><img src="{{ asset('assets/images/crm_logo_robocze.png') }}" alt="Home" style="max-width:320px;"></a>
+                    <a href="javascript:void(0)" class="db"><img src="{{ asset('assets/images/logo.png') }}" alt="Home" style="max-width:320px;"></a>
                     {% if error %}
                         <div class="alert alert-danger m-t-40">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                     {% endif %}
@@ -33,9 +33,6 @@
                                     <input type="checkbox" class="custom-control-input" id="customCheck1" name="_remember_me">
                                     <label class="custom-control-label" for="customCheck1">Zapamiętaj mnie</label>
                                 </div>
-{#                                <div class="ml-auto">#}
-{#                                    <a href="{{ path('recovery') }}" id="to-recover" class="text-muted"><i class="fas fa-lock m-r-5"></i> Zapomniałeś hasło?</a>#}
-{#                                </div>#}
                             </div>
                         </div>
                     </div>
@@ -44,11 +41,7 @@
                             <button class="btn btn-success btn-lg btn-block text-uppercase btn-rounded" type="submit">Zaloguj się</button>
                         </div>
                     </div>
-{#                    <div class="form-group m-b-0">#}
-{#                        <div class="col-sm-12 text-center">#}
-{#                            Nie masz konta? <a href="{{ path('registration') }}" class="text-primary m-l-5"><b>Zarejestruj się</b></a>#}
-{#                        </div>#}
-{#                    </div>#}
+
                 </form>
 
             </div>
@@ -56,6 +49,4 @@
     </section>
 {% endblock %}
 
-{#{% block javascripts %}#}
-{#    <script src="{{ asset('assets/js/pages/examples/sign-in.js') }}"></script>#}
-{#{% endblock %}#}
+

@@ -75,23 +75,4 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('assets/node_modules/sweetalert/sweetalert.min.js') }}"></script>
-    <script>
-        {% for flash in app.session.flashBag.get('success') %}
-        swal({
-            title: "new user!",
-            text: "{{ flash }}",
-            type: "success",
-            timer: 5000,
-        });
-        {% endfor %}
-        {% for flash in app.session.flashBag.get('error') %}
-        swal({
-            title: "error!",
-            text: "{{ flash }}",
-            type: "error",
-            timer: 5000,
-        });
-        {% endfor %}
-    </script>
 {% endblock %}

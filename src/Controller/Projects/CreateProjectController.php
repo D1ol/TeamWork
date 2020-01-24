@@ -42,10 +42,9 @@ class CreateProjectController extends AdvancedAbstractController implements Crea
             );
             $command->setResponder($this);
 
-            $createProject = $this->get('use_case.create_project');
-            $createProject->execute($command);
-
-            return $this->redirectToRoute('project_add');
+            $this->get('use_case.create_project')->execute($command);
+            if ($this->container->get('session')->getFlashBag()->has('success'))
+                return $this->redirectToRoute('projects_index');
         }
 
         return $this->render('projects/add.html.twig', [

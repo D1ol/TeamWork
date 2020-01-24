@@ -1,10 +1,17 @@
 <?php
 
 
-namespace Entity\Tasks\UseCase\EditTask;
+namespace App\Entity\Tasks\UseCase\EditTask;
 
 
-class NullResponder
+use App\Entity\Tasks\Task;
+
+class NullResponder implements Responder
 {
 
+    public function taskEdited(Task $task){}
+
+    public function projectDoesNotExist(){}
+
+    public function taskDoesNotExist(){}
 }

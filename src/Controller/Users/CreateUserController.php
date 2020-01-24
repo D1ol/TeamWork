@@ -41,13 +41,11 @@ class CreateUserController extends AdvancedAbstractController implements CreateU
             );
             $command->setResponder($this);
 
-            $createUser = $this->get('use_case.create_user');
-            $createUser->execute($command);
+             $this->get('use_case.create_user')->execute($command);
 
-            return $this->redirectToRoute('user_add');
+            if ($this->container->get('session')->getFlashBag()->has('success'))
+                return $this->redirectToRoute('users_index');
         }
-
-
 
         return $this->render('users/add.html.twig', [
             'form' => $form->createView()
@@ -56,11 +54,11 @@ class CreateUserController extends AdvancedAbstractController implements CreateU
     }
     public function userCreated(User $user)
     {
-        // TODO: Implement userCreated() method.
+        $this->addFlash('success', 'Użytkownik został stworzony');
     }
 
     public function providedEmailIsInUse(string $email)
     {
-        // TODO: Implement providedEmailIsInUse() method.
+        $this->addFlash('error', 'Użytkownik o adresie '.$email.' już istnieje');
     }
 }

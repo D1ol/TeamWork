@@ -5,6 +5,7 @@ namespace App\Adapter\Tasks;
 
 use App\Entity\Tasks\Task;
 use App\Entity\Tasks\Tasks as TasksInterface;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Persistence\ObjectManager;
 
 class Tasks implements TasksInterface
@@ -21,8 +22,8 @@ class Tasks implements TasksInterface
         $this->manager->persist($task);
     }
 
-    public function findOneByUserAndDateStartNull(string $idUser)
+    public function findOneByUserAndDateEndNull(string $idUser)
     {
-       return $this->manager->getRepository('App:Tasks\Task')->findOneBy(array('idUser' => $idUser, 'dateStart' => null));
+       return $this->manager->getRepository('App:Tasks\Task')->findOneBy(array('idUser' => $idUser, 'dateEnd' => null));
     }
 }
