@@ -20,16 +20,11 @@ class CreateUser
 
     public function execute(Command $command)
     {
+        if(!$this->checkUserExist($command))
+            return ;
+
+
         $this->transaction->begin();
-
-        $existingUser = $this->users->findOneByEmail($command->getEmail());
-
-        if($existingUser)
-        {
-            $this->transaction->rollback();
-            $command->getResponder()->providedEmailIsInUse($command->getEmail());
-            return;
-        }
 
         $user = new User(
             $command->getName(),
@@ -51,5 +46,17 @@ class CreateUser
         }
 
         $command->getResponder()->userCreated($user);
+    }
+
+    private function checkUserExist(Command $command)
+    {
+        $existingUser = $this->users->findOneByEmail($command->getEmail());
+
+        if($existingUser)
+        {
+            $command->getResponder()->providedEmailIsInUse($command->getEmail());
+            return false;
+        }
+        return true;
     }
 }

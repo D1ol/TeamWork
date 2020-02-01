@@ -4,47 +4,101 @@
 
 {% block menu_tasks %}active{% endblock %}
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('assets/node_modules/dropify/dist/css/dropify.min.css') }}">
-    <link href="{{ asset('assets/node_modules/sweetalert/sweetalert.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('assets/node_modules/jquery-asColorPicker-master/dist/css/asColorPicker.css') }}" rel="stylesheet">
 
 {% endblock %}
 
 {% block body %}
 
-    <div class="row page-titles">
-        <div class="col-md-5 align-self-center">
-            <h4 class="text-themecolor">New task</h4>
-        </div>
-        <div class="col-md-7 align-self-center text-right">
-            <div class="d-flex justify-content-end align-items-center">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ path('dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item active">New</li>
-                </ol>
+
+
+
+    <div class="row">
+        <div class=" col-12">
+            <div class="card">
+                <div class="card-body">
+
+                    {{ form_start(form,{'attr':{'class': 'form-control-line'}}) }}
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                {{ form_label(form.description) }}
+                                {{ form_errors(form.description) }}
+                                {{ form_widget(form.description) }}
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            {{ form_label(form.project) }}
+                            {{ form_errors(form.project) }}
+                            <div class="input-group">
+                                {{ form_widget(form.project) }}
+                                <div class="input-group-append" id="timer">
+                                    {% if task is null %}
+                                        <button type="button" id="start_stop"
+                                                class="btn waves-effect waves-light btn-success">Start
+                                        </button>
+                                        <button type="button" id="stop_start"
+                                                class="d-none btn waves-effect waves-light btn-warning">Stop
+                                        </button>
+                                    {% else %}
+                                        <button type="button" id="start_stop"
+                                                class="d-none waves-effect waves-light btn-success">Start
+                                        </button>
+                                        <button type="button" id="stop_start"
+                                                class="btn waves-effect waves-light btn-warning">Stop
+                                        </button>
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row d-none" id="time_block">
+                        <div class="col-12">
+                            <div>
+                                <button type="submit" id="time_button"
+                                        class="btn btn-block btn-lg btn-warning btn-start">Time</button>
+                            </div>
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+
+
+                </div>
             </div>
         </div>
     </div>
-
     <div class="row">
-        <div class="offset-3 col-6">
+        <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    {{ form_start(form,{'attr':{'class': 'form-control-line'}}) }}
-                    <div class="form-group">
-                        {{ form_label(form.description) }}
-                        {{ form_errors(form.description) }}
-                        {{ form_widget(form.description) }}
+                    <div class="table-responsive">
+                        <table id="tasks_table" class="table table-bordered table-striped color-table info-table">
+                            <thead>
+                            <tr>
+                                <th>TaskID</th>
+                                <th>Description</th>
+                                <th>Project</th>
+                                <th>Client</th>
+                                <th>Date start</th>
+                                <th>Date end</th>
+                                <th>Task time</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for uT in userTasks %}
+                                <tr>
+                                    <td>{{ uT.taskID }}</td>
+                                    <td>{{ uT.description }}</td>
+                                    <td>{{ uT.projectName }}</td>
+                                    <td>{{ uT.clientName }}</td>
+                                    <td>{{ uT.dateStart|date('Y-m-d') }}</td>
+                                    <td>{{ uT.dateEnd|date('Y-m-d') }}</td>
+                                    <td>{{ uT.getTaskTime }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
-
-                    <div class="form-group">
-                        {{ form_label(form.project) }}
-                        {{ form_errors(form.project) }}
-                        {{ form_widget(form.project) }}
-                    </div>
-
-                    {{ form_end(form) }}
-
                 </div>
             </div>
         </div>
@@ -52,29 +106,111 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('assets/node_modules/dropify/dist/js/dropify.min.js') }}"></script>
-    <script src="{{ asset('assets/node_modules/sweetalert/sweetalert.min.js') }}"></script>
-    <script src="{{ asset('assets/node_modules/jquery-asColor/dist/jquery-asColor.js') }}"></script>
-    <script src="{{ asset('assets/node_modules/jquery-asGradient/dist/jquery-asGradient.js') }}"></script>
-    <script src="{{ asset('assets/node_modules/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js') }}"></script>
-    <script src="{{ asset('assets/node_modules/sweetalert/jquery.sweet-alert.custom.js') }}"></script>
+    <script src="{{ asset('assets/dist/js/easytimer.min.js') }}"></script>
     <script>
-        {% for flash in app.session.flashBag.get('success') %}
-        swal({
-            title: "new user!",
-            text: "{{ flash }}",
-            type: "success",
-            timer: 5000,
+        $(function () {
+            var table = $('#tasks_table').dataTable();
+
+
+            var $start_stop = $('#start_stop');
+            var $stop_start = $('#stop_start');
+            var $time_button = $('#time_button');
+
+            var timer = new easytimer.Timer();
+            {% if task %}
+            timer.start({startValues: {seconds: {{ ('now'|date('U') - task.datestart|date('U')) }} }});
+            $('#time_block').removeClass('d-none');
+            {% endif %}
+
+            $start_stop.click(function () {
+                $('.spinner-wrapp').css({'display': 'flex'});
+
+                $.ajax({
+                    method: 'POST',
+                    url: '{{ path('task_ajax') }}',
+                    data: {
+                        description: $("#add_task_description").val(),
+                        project: $("#add_task_project").val(),
+                    },
+                    success: function (response) {
+                        timer.start();
+                        $('.spinner-wrapp').css({'display': 'none'});
+                        $stop_start.removeClass('d-none');
+                        $start_stop.addClass('d-none');
+                        $('#time_block').removeClass('d-none')
+                    },
+                    error: function (xhr) {
+                        $('.spinner-wrapp').css({'display': 'none'});
+                        var text = xhr.responseJSON;
+                        swal({
+                            title: "error!",
+                            text: text,
+                            type: "error",
+                            timer: 5000,
+                        });
+                    }
+                });
+            });
+
+            $stop_start.click(function () {
+                console.log('1');
+                $('.spinner-wrapp').css({'display': 'flex'});
+
+                $.ajax({
+                    method: 'POST',
+                    url: '{{ path('task_ajax') }}',
+                    data: {
+                        description: $("#add_task_description").val(),
+                        project: $("#add_task_project").val(),
+                        stop: true
+
+                    },
+                    success: function (response) {
+
+                        timer.stop();
+
+                        $('form[name="add_task"]')[0].reset();
+
+                        $('.spinner-wrapp').css({'display': 'none'});
+
+                        $stop_start.addClass('d-none');
+                        $start_stop.removeClass('d-none');
+
+                        table.fnAddData([
+                                    response.taskID,
+                                    response.description,
+                                    response.projectName,
+                                    response.clientName,
+                                    response.dateStart,
+                                    response.dateEnd,
+                                    response.taskTime
+                                ]);
+
+
+                        $('#time_block').addClass('d-none');
+                    },
+                    error: function (xhr) {
+
+                        $('.spinner-wrapp').css({'display': 'none'});
+                        var text = xhr.responseJSON;
+                        swal({
+                            title: "error!",
+                            text: text,
+                            type: "error",
+                            timer: 5000,
+                        });
+                    }
+                });
+            });
+            timer.addEventListener('secondsUpdated', function (e) {
+                $time_button.html(timer.getTimeValues().toString());
+            });
+            timer.addEventListener('started', function (e) {
+                $time_button.html(timer.getTimeValues().toString());
+            });
         });
-        {% endfor %}
-        {% for flash in app.session.flashBag.get('error') %}
-        swal({
-            title: "error!",
-            text: "{{ flash }}",
-            type: "error",
-            timer: 5000,
-        });
-        {% endfor %}
+
 
     </script>
+
 {% endblock %}

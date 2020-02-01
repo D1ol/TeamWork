@@ -120,4 +120,13 @@ class Project
 
         return $this;
     }
+
+    /**
+     * @return Client
+     */
+    public function getIdClient(): Client
+    {
+        return $this->idClient;
+    }
+
 }

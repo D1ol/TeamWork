@@ -9,8 +9,7 @@ use App\Entity\Tasks\Task;
 class NullResponder implements Responder
 {
 
-    public function taskCreated(Task $task)
-    {
-        // TODO: Implement taskCreated() method.
-    }
+    public function taskCreated(Task $task){}
+
+    public function projectDoesNotExist(){}
 }

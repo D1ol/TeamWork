@@ -25,4 +25,8 @@ class Projects implements ProjectsInterface
     {
         return $this->manager->getRepository('App:Projects\Project')->findOneBy(['name'=>$name]);
     }
+    public function findOneByProjectID(string $projectID)
+    {
+        return $this->manager->getRepository('App:Projects\Project')->findOneBy(['id'=>$projectID]);
+    }
 }
