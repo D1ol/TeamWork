@@ -5,7 +5,7 @@
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
-        <meta name="author" content="yellowsPL">
+        <meta name="author" content="IhorShchypakov">
         <!-- Favicon icon -->
         <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/icon/icon3.png') }}">
         <title>{% block title %}{% endblock %}</title>
@@ -14,9 +14,12 @@
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 
         {% block stylesheets %}{% endblock %}
-        <link href="{{ asset('assets/dist/css/style.min.css') }}" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="{{ asset('assets/node_modules/dropify/dist/css/dropify.min.css') }}">
-
+        <link href="{{ asset('assets/dist/css/pages/user-card.css') }}" rel="stylesheet" >
+        <link href="{{ asset('assets/node_modules/datatables/media/css/dataTables.bootstrap4.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/dist/css/style.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -64,6 +67,13 @@
                 </div>
             </div>
         {% endblock %}
+        {% block spinnerwrapp %}
+            <div class="spinner-wrapp " style="display: none;">
+                <div class="spinner-grow text-info" role="status">
+                    <span class="sr-only">Wait...</span>
+                </div>
+            </div>
+        {% endblock %}
 
         <div id="main-wrapper">
             <!-- ============================================================== -->
@@ -78,12 +88,12 @@
                     <div class="navbar-header">
                         <a class="navbar-brand" href="{{ path('dashboard') }}">
                             <b>
-                                <img src="{{ asset('assets/images/logo-light-icon.png') }}"  alt="homepage" class="light-logo" />
-                                <img src="{{ asset('assets/images/logo-icon.png') }}" alt="Home" class="dark-logo"/>
+{#                                <img src="{{ asset('assets/images/t.png') }}"  alt="homepage" class="light-logo" />#}
+                                <img src="{{ asset('assets/images/t.png') }}" alt="Home" class="dark-logo"/>
                             </b>
                             <span>
-                                <img src="{{  asset('assets/images/logo-light-text.png') }}"  alt="homepage" class="light-logo" />
-                                <img src="{{ asset('assets/images/logo-icon.png') }} }}" class="dark-logo" alt="homepage" />
+                                <img src="{{  asset('assets/images/logo.png') }}"  alt="homepage" class="light-logo" />
+                                <img src="{{ asset('assets/images/logo.png') }}" class="dark-logo" alt="homepage" />
                             </span>
                         </a>
                     </div>
@@ -246,7 +256,7 @@
                             <!-- ============================================================== -->
                             <!-- End User Profile -->
                             <!-- ============================================================== -->
-                            <li class="nav-item right-side-toggle"> <a class="nav-link  waves-effect waves-light" href="javascript:void(0)"><i class="ti-settings"></i></a></li>
+                            <li class="nav-item right-side-toggle"> <a class="nav-link  waves-effect waves-light" href="{{ path('logout') }}"><i class="ti-power-off"></i></a></li>
                         </ul>
                     </div>
                 </nav>
@@ -265,7 +275,7 @@
                         <!-- Sidebar navigation-->
                         <nav class="sidebar-nav">
                             <ul id="sidebarnav">
-                                <li><a class="waves-effect waves-dark" href="#" aria-expanded="false">
+                                <li><a class="waves-effect waves-dark" href="{{ path('dashboard') }}" aria-expanded="false">
                                         <i class="icon-home"></i>
                                         <span class="hide-menu">
                                            Strona główna</span></a>
@@ -342,18 +352,57 @@
         <!-- Bootstrap tether Core JavaScript -->
         <script src="{{ asset('assets/node_modules/popper/popper.min.js') }}"></script>
         <script src="{{ asset('assets/node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+
         <!-- slimscrollbar scrollbar JavaScript -->
         <script src="{{ asset('assets/dist/js/perfect-scrollbar.jquery.min.js') }}"></script>
         <!--Wave Effects -->
         <script src="{{ asset('assets/dist/js/waves.js') }}"></script>
         <!--Menu sidebar -->
         <script src="{{ asset('assets/dist/js/sidebarmenu.js') }}"></script>
+        <!--Sweet Alert -->
+        <script src="{{ asset('assets/node_modules/sweetalert/sweetalert.min.js') }}"></script>
+        <script src="{{ asset('assets/node_modules/sweetalert/jquery.sweet-alert.custom.js') }}"></script>
+
         <!--stickey kit -->
         <script src="{{ asset('assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js') }}"></script>
         <script src="{{ asset('assets/node_modules/sparkline/jquery.sparkline.min.js') }}"></script>
         <!--Custom JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+        <!-- DataTables -->
+        <script src="{{ asset('assets/node_modules/datatables/datatables.min.js') }}"></script>
+        <script src="{{ asset('assets/node_modules/dropify/dist/js/dropify.min.js') }}"></script>
         <script src="{{ asset('assets/dist/js/custom.min.js') }}"></script>
+        <script>
+            {% for flash in app.session.flashBag.get('success') %}
+            swal({
+                text: "{{ flash }}",
+                type: "success",
+                timer: 2000,
+                showConfirmButton: false
+            });
+            {% endfor %}
 
+            {% for flash in app.session.flashBag.get('error') %}
+            swal({
+                text: "{{ flash|raw }}",
+                type: "error",
+                showCancelButton: true,
+                showConfirmButton: false,
+                cancelButtonText: 'Anuluj',
+            });
+            {% endfor %}
+
+            {% for flash in app.session.flashBag.get('delete') %}
+            swal({
+                title: "Usunięto!",
+                text: "{{ flash }}",
+                type: "success",
+                timer: 2000,
+                showConfirmButton: false
+            });
+            {% endfor %}
+
+        </script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

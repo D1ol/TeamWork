@@ -1,11 +1,88 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New user{% endblock %}
+{% block title %}Dashboard{% endblock %}
 
+{% block stylesheets %}
+
+
+   <style>
+      .btn-w-h-250{
+         width: 230px;
+         height: 230px;
+      }
+      .dropdown_pulpit{
+         width: calc(100% - 20px);
+      }
+      .font-10-em
+      {
+         font-size: 10em;
+      }
+
+      .btn_span {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         flex-direction: column;
+         padding-top: 30px!important;
+      }
+      .btn_span > * {
+         display: block;
+      }
+
+      .btn-secondary__name {
+         font-size: 24px;
+         margin-top: 15px;
+      }
+      .b-1-blue {
+         border: 1px solid #039be0!important;
+      }
+
+   </style>
+{% endblock %}
 
 
 {% block body %}
-   elo
+   <div class="row p-t-30">
+      <div class="col-12">
+         <div class="row p-10">
+            <div class="btn-group col-6">
+               <a class="btn waves-effect waves-light btn-outline-info btn_span" href="{{ path('task_add') }}"  >
+                  <i class="font-10-em ti-list"></i>
+                  <span class="btn-secondary__name">
+                                    Zadania
+                                </span>
+               </a>
+            </div>
+            <div class="btn-group col-6 ">
+               <a class="btn waves-effect waves-light btn-outline-info btn_span" href="{{ path('users_index') }}"  >
+                  <i class="font-10-em icon-people"></i>
+                  <span class="btn-secondary__name">
+                                    Zespol
+                                </span>
+               </a>
+            </div>
+         </div>
+
+         <div class="row p-10">
+            <div class="btn-group col-6">
+               <a class="btn waves-effect waves-light btn-outline-info btn_span" href="{{ path('projects_index') }}"  >
+                  <i class="font-10-em ti-folder"></i>
+                  <span class="btn-secondary__name">
+                                    Projekty
+                                </span>
+               </a>
+            </div>
+            <div class="btn-group col-6 ">
+               <a class="btn waves-effect waves-light btn-outline-info btn_span" href="{{ path('clients_index') }}"  >
+                  <i class="font-10-em ti-user"></i>
+                  <span class="btn-secondary__name">
+                                    Klienci
+                                </span>
+               </a>
+            </div>
+         </div>
+      </div>
+   </div>
 {% endblock %}
 
 {% block javascripts %}

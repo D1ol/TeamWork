@@ -2,6 +2,8 @@
 
 namespace App\Entity\Tasks;
 
+use App\Entity\Projects\Project;
+use App\Entity\Users\User;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,23 +43,32 @@ class Task
      * @ORM\ManyToOne(targetEntity="App\Entity\Projects\Project")
      * @ORM\JoinColumn(name="id_project", referencedColumnName="id", nullable=true)
      */
-    private $idProjects;
+    private $idProject;
 
 
     public function __construct(
-        $description,
-        $dateEnd,
-        $idUser,
-        $idProjects
+        string $description,
+        User $idUser,
+        Project $idProject,
+        \DateTime $dateEnd = null
     )
     {
         $this->description = $description;
         $this->dateStart = new \DateTime('now');
-        $this->dateEnd = $dateEnd;
         $this->idUser = $idUser;
-        $this->idProjects = $idProjects;
+        $this->idProject = $idProject;
+        $this->dateEnd = $dateEnd;
     }
 
+    public function stop(
+        string $description,
+        $idProject
+    )
+    {
+        $this->description = $description;
+        $this->idProject = $idProject;
+        $this->dateEnd = new \DateTime('now');
+    }
 
     public function getId(): ?int
     {
@@ -69,26 +80,41 @@ class Task
         return $this->description;
     }
 
-
-    public function getDateStart()
+    /**
+     * @return \DateTime|null
+     */
+    public function getDateStart(): ?\DateTime
     {
         return $this->dateStart;
     }
 
-
-    public function getDateEnd()
+    /**
+     * @return \DateTime|null
+     */
+    public function getDateEnd(): ?\DateTime
     {
         return $this->dateEnd;
     }
 
-    public function getIdUser()
+
+
+
+
+
+    /**
+     * @return User
+     */
+    public function getIdUser(): User
     {
         return $this->idUser;
     }
 
-    public function getIdProjects()
+    /**
+     * @return Project
+     */
+    public function getIdProject(): Project
     {
-        return $this->idProjects;
+        return $this->idProject;
     }
 
 

@@ -4,13 +4,11 @@
 
 {% block stylesheets %}
     <link href="{{ asset('assets/node_modules/cropper/cropper.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/node_modules/sweetalert/sweetalert.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/dist/css/pages/contact-app-page.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('assets/dist/css/style.min.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
-    {{ dump() }}
+{#    {{ dump() }}#}
 
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
@@ -128,10 +126,7 @@
 
 {% block javascripts %}
     <script src="{{ asset('assets/node_modules/cropper/cropper.min.js') }}"></script>
-    <script src="{{ asset('assets/node_modules/dropify/dist/js/dropify.min.js') }}"></script>
-    <script src="{{ asset('assets/node_modules/sweetalert/sweetalert.min.js') }}"></script>
-    <script src="{{ asset('assets/node_modules/sweetalert/jquery.sweet-alert.custom.js') }}"></script>
-    <script src="{{ asset('assets/dist/js/custom.min.js') }}"></script>
+
     <script>
         {% for flash in app.session.flashBag.get('success') %}
         swal({

@@ -10,15 +10,14 @@ use App\Entity\Users\User;
 class Command
 {
     private $description;
-
     private $idUser;
     private $idProject;
     private $responder;
 
     public function __construct(
-        string $description,
+        ?string $description,
         User $idUser,
-        Project $idProject
+        string $idProject
     )
     {
         $this->description = $description;
@@ -28,9 +27,9 @@ class Command
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -44,9 +43,9 @@ class Command
     }
 
     /**
-     * @return Project
+     * @return string
      */
-    public function getIdProject(): Project
+    public function getIdProject(): string
     {
         return $this->idProject;
     }

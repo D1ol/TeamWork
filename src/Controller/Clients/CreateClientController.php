@@ -45,10 +45,10 @@ class CreateClientController extends AdvancedAbstractController implements Creat
             );
             $command->setResponder($this);
 
-            $createClient = $this->get('use_case.create_client');
-            $createClient->execute($command);
+            $this->get('use_case.create_client')->execute($command);
 
-            return $this->redirectToRoute('client_add');
+            if ($this->container->get('session')->getFlashBag()->has('success'))
+                return $this->redirectToRoute('clients_index');
         }
 
         return $this->render('clients/add.html.twig', [
