@@ -79,6 +79,7 @@ class AjaxTaskController extends AdvancedAbstractController implements CreateTas
 
     public function taskCreated(Task $task)
     {
+        $this->addFlash('success', 'Task created');
     }
 
     public function projectDoesNotExist()
