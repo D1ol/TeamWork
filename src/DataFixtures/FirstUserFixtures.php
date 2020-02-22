@@ -1,7 +1,7 @@
 <?php
 
 
-namespace DataFixtures;
+namespace App\DataFixtures;
 
 
 use App\Entity\Users\User;
@@ -9,7 +9,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class FirstUserFixture extends Fixture implements OrderedFixtureInterface
+class FirstUserFixtures extends Fixture implements OrderedFixtureInterface
 {
 
     /**
