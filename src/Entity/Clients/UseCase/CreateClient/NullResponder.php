@@ -8,14 +8,7 @@ use App\Entity\Clients\Client;
 
 class NullResponder implements Responder
 {
+    public function clientCreated(Client $client){}
 
-    public function clientCreated(Client $user)
-    {
-        // TODO: Implement clientCreated() method.
-    }
-
-    public function clientExist(string $name)
-    {
-        // TODO: Implement clientExist() method.
-    }
+    public function clientExist(string $name){}
 }

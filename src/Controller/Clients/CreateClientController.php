@@ -31,6 +31,7 @@ class CreateClientController extends AdvancedAbstractController implements Creat
         );
 
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
@@ -63,6 +64,7 @@ class CreateClientController extends AdvancedAbstractController implements Creat
 
     public function clientExist(string $name)
     {
-        // TODO: Implement clientExist() method.
+        $this->addFlash('error', 'Client: '.$name.' exist');
     }
+
 }

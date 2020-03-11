@@ -55,7 +55,7 @@
                     <div class="row d-none" id="time_block">
                         <div class="col-12">
                             <div>
-                                <button type="submit" id="time_button"
+                                <button type="submit" id="time_button" disabled
                                         class="btn btn-block btn-lg btn-warning btn-start">Time</button>
                             </div>
                         </div>
@@ -169,7 +169,7 @@
 
                         timer.stop();
 
-                        $('form[name="add_task"]')[0].reset();
+                        $('form[name="add_task"]').trigger('reset');
 
                         $('.spinner-wrapp').css({'display': 'none'});
 
