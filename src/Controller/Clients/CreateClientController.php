@@ -13,6 +13,11 @@ use App\Form\Clients\AddClientType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class CreateClientController
+ * @package App\Controller\Clients
+ * @Route("/{_locale}", defaults={"_locale" = "en"}, requirements={"_locale" = "en|pl"})
+ */
 class CreateClientController extends AdvancedAbstractController implements CreateClientResponder
 {
     /**

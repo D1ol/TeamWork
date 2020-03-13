@@ -10,6 +10,11 @@ use App\Form\Users\AddUserType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class CreateUserController
+ * @package App\Controller\Users
+ * @Route("/{_locale}", defaults={"_locale" = "en"}, requirements={"_locale" = "en|pl"})
+ */
 class CreateUserController extends AdvancedAbstractController implements CreateUserResponder
 {
 

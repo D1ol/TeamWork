@@ -1,0 +1,10 @@
+{% set route = app.request.attributes.get('_route') %}
+{% set route_params = app.request.attributes.get('_route_params') %}
+{% set params = route_params|merge(app.request.query.all) %}
+{% set locale = app.request.locale %}
+
+<a href="{{ path(app.request.attributes.get('_route'),  params|merge({ _locale: 'en' })) }}" class="dropdown-item"><i class="flag-icon flag-icon-gb" title="gb" id="gb"></i> en</a>
+<a href="{{ path(app.request.attributes.get('_route'),  params|merge({ _locale: 'pl' })) }}" class="dropdown-item"><i class="flag-icon flag-icon-pl" title="pl" id="pl"></i> pl</a>
+
+
+

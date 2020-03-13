@@ -29,4 +29,12 @@ class Projects implements ProjectsInterface
     {
         return $this->manager->getRepository('App:Projects\Project')->findOneBy(['id'=>$projectID]);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function findAll()
+    {
+       return $this->manager->getRepository(Project::class)->findAll();
+    }
 }

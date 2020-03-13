@@ -26,4 +26,12 @@ class Clients implements ClientsInteface
     {
         return $this->manager->getRepository('App:Clients\Client')->findOneBy(['name'=>$name]);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function findAll()
+    {
+        return $this->manager->getRepository('App:Clients\Client')->findAll();
+    }
 }

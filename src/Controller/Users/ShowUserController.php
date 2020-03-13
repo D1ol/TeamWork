@@ -18,6 +18,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Users\UseCase\EditUser\Responder as EditResponder;
 use App\Entity\Users\UseCase\ChangePhoto\Responder as ChangePhotoResponder;
 
+/**
+ * Class ShowUserController
+ * @package App\Controller\Users
+ * @Route("/{_locale}", defaults={"_locale" = "en"}, requirements={"_locale" = "en|pl"})
+ */
 class ShowUserController extends AdvancedAbstractController implements EditResponder, ChangePhotoResponder
 {
     /**

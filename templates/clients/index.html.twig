@@ -10,15 +10,15 @@
 
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h4 class="text-themecolor">Our clients</h4>
+            <h4 class="text-themecolor">{% trans %}Our clients{% endtrans %}</h4>
         </div>
         <div class="col-md-7 align-self-center text-right">
             <div class="d-flex justify-content-end align-items-center">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ path('dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item active">New</li>
+                    <li class="breadcrumb-item"><a href="{{ path('dashboard', {'_locale':app.request.get('_locale')}) }}">{% trans %}Home{% endtrans %}</a></li>
+                    <li class="breadcrumb-item active">{% trans %}New{% endtrans %}</li>
                 </ol>
-                <a href="{{ path('client_add') }}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Create Client</a>
+                <a href="{{ path('client_add') }}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i>{% trans %}Create Client{% endtrans %}</a>
             </div>
         </div>
     </div>
@@ -46,7 +46,7 @@
                         <h3 class="box-title">{{client.name}}</h3>
                         <i class="mdi mdi-checkbox-blank-circle vertical-middle" style="color: {{ client.color }}"></i>
                         <small>
-                           Client color</small>
+                            {% trans %}Client color{% endtrans %}</small>
                         <br/></div>
                 </div>
             </div>

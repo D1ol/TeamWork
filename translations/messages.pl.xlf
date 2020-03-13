@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="pl" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="Ghoaxzn" resname="Wait...">
+        <source>Wait...</source>
+        <target>Poczekaj...</target>
+      </trans-unit>
+      <trans-unit id="njOR6b8" resname="Homepage">
+        <source>Homepage</source>
+        <target>Strona głowna</target>
+      </trans-unit>
+      <trans-unit id="s6YOYaU" resname="Tasks">
+        <source>Tasks</source>
+        <target>Zadania</target>
+      </trans-unit>
+      <trans-unit id="BOKpcor" resname="Projects">
+        <source>Projects</source>
+        <target>Projekty</target>
+      </trans-unit>
+      <trans-unit id="ZaclZUL" resname="Clients">
+        <source>Clients</source>
+        <target>Clienci</target>
+      </trans-unit>
+      <trans-unit id="WYUDnxB" resname="Team">
+        <source>Team</source>
+        <target>Zespół</target>
+      </trans-unit>
+      <trans-unit id="Y4T.p3E" resname="New user">
+        <source>New user</source>
+        <target>Nowy użytkownik</target>
+      </trans-unit>
+      <trans-unit id="OnhpU4i" resname="Home">
+        <source>Home</source>
+        <target>Strona głowna</target>
+      </trans-unit>
+      <trans-unit id="GP3VSbL" resname="New">
+        <source>New</source>
+        <target>Nowy</target>
+      </trans-unit>
+      <trans-unit id="uxOUQMa" resname="Our clients">
+        <source>Our clients</source>
+        <target>Nasze klienci</target>
+      </trans-unit>
+      <trans-unit id="XONJw2k" resname="Create Client">
+        <source>Create Client</source>
+        <target>Tworzenie klienta</target>
+      </trans-unit>
+      <trans-unit id="8RVpGxm" resname="Client color">
+        <source>Client color</source>
+        <target>Color klienta</target>
+      </trans-unit>
+      <trans-unit id="luYJeit" resname="Update team">
+        <source>Update team</source>
+        <target>Aktualizacja zespołu</target>
+      </trans-unit>
+      <trans-unit id="TTwp0yW" resname="Create Project">
+        <source>Create Project</source>
+        <target>Tworzenie projektu</target>
+      </trans-unit>
+      <trans-unit id="kjQGlYm" resname="Active">
+        <source>Active</source>
+        <target>Aktywny</target>
+      </trans-unit>
+      <trans-unit id="jY.qiE7" resname="Disactive">
+        <source>Disactive</source>
+        <target>Nie aktywny</target>
+      </trans-unit>
+      <trans-unit id="DHf_Cas" resname="Client">
+        <source>Client</source>
+        <target>__Client</target>
+      </trans-unit>
+      <trans-unit id="TLy55bz" resname="Tasks today">
+        <source>Tasks today</source>
+        <target>Zadań dzisiaj</target>
+      </trans-unit>
+      <trans-unit id="awzJBNC" resname="Users">
+        <source>Users</source>
+        <target>Użytkownicy</target>
+      </trans-unit>
+      <trans-unit id="5LufHs6" resname="Start">
+        <source>Start</source>
+        <target>Rozpocznij</target>
+      </trans-unit>
+      <trans-unit id="yufVe8B" resname="Stop">
+        <source>Stop</source>
+        <target>Skończ </target>
+      </trans-unit>
+      <trans-unit id="M7k0ds9" resname="Time">
+        <source>Time</source>
+        <target>Czas</target>
+      </trans-unit>
+      <trans-unit id="fLHD2Y9" resname="TaskID">
+        <source>TaskID</source>
+        <target>TaskID</target>
+      </trans-unit>
+      <trans-unit id="Um4Ah8w" resname="Description">
+        <source>Description</source>
+        <target>Opis</target>
+      </trans-unit>
+      <trans-unit id="mFlZeFM" resname="Project">
+        <source>Project</source>
+        <target>Projekt</target>
+      </trans-unit>
+      <trans-unit id="H2W9Z9B" resname="Date start">
+        <source>Date start</source>
+        <target>Data rozpoczęcia</target>
+      </trans-unit>
+      <trans-unit id="y6lh9qx" resname="Date end">
+        <source>Date end</source>
+        <target>Data końca</target>
+      </trans-unit>
+      <trans-unit id="NcNuD9f" resname="Task time">
+        <source>Task time</source>
+        <target>Czas zadania</target>
+      </trans-unit>
+      <trans-unit id="wwDJRU9" resname="Our Team">
+        <source>Our Team</source>
+        <target>Nasz zespół</target>
+      </trans-unit>
+      <trans-unit id="XhgtcZd" resname="Generate Excel">
+        <source>Generate Excel</source>
+        <target>Generacja Excel</target>
+      </trans-unit>
+      <trans-unit id="FHNqLrn" resname="Role">
+        <source>Role</source>
+        <target>Role</target>
+      </trans-unit>
+      <trans-unit id="Y9zriAC" resname="Phone">
+        <source>Phone</source>
+        <target>Telefon</target>
+      </trans-unit>
+      <trans-unit id="fZ63rLE" resname="Close">
+        <source>Close</source>
+        <target>Zamknij</target>
+      </trans-unit>
+      <trans-unit id="1pajW90" resname="Profile">
+        <source>Profile</source>
+        <target>Profil</target>
+      </trans-unit>
+      <trans-unit id="Pcw8RYO" resname="Accoubts Manager Amix corp">
+        <source>Accoubts Manager Amix corp</source>
+        <target>Accoubts Manager Amix corp</target>
+      </trans-unit>
+      <trans-unit id="8kiP1O9" resname="Email address">
+        <source>Email address</source>
+        <target>Adres email</target>
+      </trans-unit>
+      <trans-unit id="dKiDoDe" resname="Settings">
+        <source>Settings</source>
+        <target>Ustawienia</target>
+      </trans-unit>
+      <trans-unit id="2E7rrak" resname="Photo">
+        <source>Photo</source>
+        <target>Zdjęcie</target>
+      </trans-unit>
+      <trans-unit id="Rgs6faA" resname="Chat">
+        <source>Chat</source>
+        <target>Czat</target>
+      </trans-unit>
+      <trans-unit id="E_uVNf_" resname="Chat on WebSockets">
+        <source>Chat on WebSockets</source>
+        <target>Czat  WebSocket</target>
+      </trans-unit>
+      <trans-unit id="E_uVNsf_" resname="Type your message...">
+        <source>Type your message...</source>
+        <target>Napisz wiadomość...</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

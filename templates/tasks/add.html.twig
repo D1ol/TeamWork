@@ -34,17 +34,17 @@
                                 <div class="input-group-append" id="timer">
                                     {% if task is null %}
                                         <button type="button" id="start_stop"
-                                                class="btn waves-effect waves-light btn-success">Start
+                                                class="btn waves-effect waves-light btn-success">{% trans %}Start{% endtrans %}
                                         </button>
                                         <button type="button" id="stop_start"
-                                                class="d-none btn waves-effect waves-light btn-warning">Stop
+                                                class="d-none btn waves-effect waves-light btn-warning">{% trans %}Stop{% endtrans %}
                                         </button>
                                     {% else %}
                                         <button type="button" id="start_stop"
-                                                class="d-none waves-effect waves-light btn-success">Start
+                                                class="d-none waves-effect waves-light btn-success">{% trans %}Start{% endtrans %}
                                         </button>
                                         <button type="button" id="stop_start"
-                                                class="btn waves-effect waves-light btn-warning">Stop
+                                                class="btn waves-effect waves-light btn-warning">{% trans %}Stop{% endtrans %}
                                         </button>
                                     {% endif %}
 
@@ -56,7 +56,7 @@
                         <div class="col-12">
                             <div>
                                 <button type="submit" id="time_button" disabled
-                                        class="btn btn-block btn-lg btn-warning btn-start">Time</button>
+                                        class="btn btn-block btn-lg btn-warning btn-start">{% trans %}Time{% endtrans %}</button>
                             </div>
                         </div>
                     </div>
@@ -75,13 +75,13 @@
                         <table id="tasks_table" class="table table-bordered table-striped color-table info-table">
                             <thead>
                             <tr>
-                                <th>TaskID</th>
-                                <th>Description</th>
-                                <th>Project</th>
-                                <th>Client</th>
-                                <th>Date start</th>
-                                <th>Date end</th>
-                                <th>Task time</th>
+                                <th>{% trans %}TaskID{% endtrans %}</th>
+                                <th>{% trans %}Description{% endtrans %}</th>
+                                <th>{% trans %}Project{% endtrans %}</th>
+                                <th>{% trans %}Client{% endtrans %}</th>
+                                <th>{% trans %}Date start{% endtrans %}</th>
+                                <th>{% trans %}Date end{% endtrans %}</th>
+                                <th>{% trans %}Task time{% endtrans %}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -91,8 +91,8 @@
                                     <td>{{ uT.description }}</td>
                                     <td>{{ uT.projectName }}</td>
                                     <td>{{ uT.clientName }}</td>
-                                    <td>{{ uT.dateStart|date('Y-m-d') }}</td>
-                                    <td>{{ uT.dateEnd|date('Y-m-d') }}</td>
+                                    <td>{{ uT.dateStart|date('Y-m-d H:i:s') }}</td>
+                                    <td>{{ uT.dateEnd|date('Y-m-d H:i:s') }}</td>
                                     <td>{{ uT.getTaskTime }}</td>
                                 </tr>
                             {% endfor %}

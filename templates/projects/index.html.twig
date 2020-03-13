@@ -7,47 +7,49 @@
 {% endblock %}
 
 {% block body %}
-{#    {{ dump() }}#}
+    {#    {{ dump() }}#}
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h4 class="text-themecolor">Our clients</h4>
+            <h4 class="text-themecolor">{% trans %}Our clients{% endtrans %}</h4>
         </div>
         <div class="col-md-7 align-self-center text-right">
             <div class="d-flex justify-content-end align-items-center">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ path('dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item active">New</li>
+                    <li class="breadcrumb-item"><a href="{{ path('dashboard') }}">{% trans %}Home{% endtrans %}</a></li>
+                    <li class="breadcrumb-item active">{% trans %}New{% endtrans %}</li>
                 </ol>
-                <a href="{{ path('project_add') }}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Create Project</a>
+                <a href="{{ path('project_add') }}" class="btn btn-info d-none d-lg-block m-l-15"><i
+                            class="fa fa-plus-circle"></i>{% trans %}Create Project{% endtrans %}</a>
             </div>
         </div>
     </div>
 
     <div class="row">
         {% for project in projects %}
-        <div class="col-md-4 col-sm-4">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4 col-sm-4 text-center">
-                            <div class="m-l-30 m-t-20 img-circle img-responsive" style="width:60px; height:60px; background-color: {{ project.clientColor }}"></div>
-                        </div>
-                        <div class="col-md-8 col-sm-8">
-                            <h5 class="card-title m-b-0"> {{project.name}}</h5>
-                            <small>{% if project.isActive %} Aktywny  {% else %} Nie aktywny{% endif %}</small>
-            <p>
-                            <info>
-                                {{project.description}}
-                                <br/>
-                                <br/>
-                                {{project.clientName}}
-                            </info>
-                            </p>
+            <div class="col-md-4 col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4 text-center">
+                                <div class="m-l-30 m-t-20 img-circle img-responsive"
+                                     style="width:60px; height:60px; background-color: {{ project.clientColor }}"></div>
+                            </div>
+                            <div class="col-md-8 col-sm-8">
+                                <h5 class="card-title m-b-0"> {{ project.name }}</h5>
+                                <small>{% if project.isActive %} {% trans %}Active{% endtrans %} {% else %}{% trans %} Disactive {% endtrans %}{% endif %}</small>
+                                <p>
+                                    <info>
+                                        {{ project.description }}
+                                        <br/>
+                                        <br/>
+                                        {% trans %}Client{% endtrans %}: {{ project.clientName }}
+                                    </info>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         {% endfor %}
     </div>
 

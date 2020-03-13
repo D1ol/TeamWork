@@ -23,17 +23,17 @@ final class Users implements UsersInterface
 
     public function findOneByEmail(string $email)
     {
-        return $this->manager->getRepository('App:Users\User')->findOneBy([
+        return $this->manager->getRepository(User::class)->findOneBy([
             'email'=>$email
         ]);
     }
     public function findOneById(string $id)
     {
-        return $this->manager->getRepository('App:Users\User')->findOneBy(['id'=>$id]);
+        return $this->manager->getRepository(User::class)->findOneBy(['id'=>$id]);
     }
 
-    public function update(User $user)
+    public function findAll()
     {
-        $this->manager->flush();
+        return $this->manager->getRepository(User::class)->findAll();
     }
 }

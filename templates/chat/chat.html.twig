@@ -1,0 +1,160 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Chat{% endblock %}
+{% block menu_chat %}active{% endblock %}
+{% block stylesheets %}
+
+
+    <style>
+        .chat{
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+        .card{
+            height: 500px;
+            border-radius: 15px !important;
+            background: #7F7FD5!important;;
+            background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5)!important;;
+            background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5)!important;;
+        }
+        .contacts_body{
+            padding:  0.75rem 0 !important;
+            overflow-y: auto;
+            white-space: nowrap;
+        }
+        .msg_card_body{
+            overflow-y: auto;
+        }
+        .card-header{
+            border-radius: 15px 15px 0 0 !important;
+            border-bottom: 0 !important;
+        }
+        .card-footer{
+            border-radius: 0 0 15px 15px !important;
+            border-top: 0 !important;
+        }
+        .container{
+            align-content: center;
+        }
+        .search{
+            border-radius: 15px 0 0 15px !important;
+            background-color: rgba(0,0,0,0.3) !important;
+            border:0 !important;
+            color:white !important;
+        }
+    </style>
+{% endblock %}
+
+
+{% block body %}
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h4 class="text-themecolor">{% trans %}Chat on WebSockets{% endtrans %}</h4>
+        </div>
+        <div class="col-md-7 align-self-center text-right">
+            <div class="d-flex justify-content-end align-items-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ path('dashboard') }}">{% trans %}Home{% endtrans %}</a></li>
+                </ol>
+
+            </div>
+        </div>
+    </div>
+<div class="row">
+        <div class="offset-3 col-md-8 col-xl-6 chat">
+            <div class="card">
+                <div class="card-header msg_head">
+                    <div class="d-flex bd-highlight">
+                        <div class="img_cont">
+                            <img src="{% if app.user.photo %}{{ asset('uploads/avatar/'~app.user.name~'/'~app.user.photo) }}{% else %}{{ asset('uploads/avatar/default.jpg') }}{% endif %}"
+                                 class="rounded-circle user_img">
+                            <span class="online_icon"></span>
+                        </div>
+                        <div class="user_info">
+                            <span>{{ app.user.name }} {{ app.user.surname }}</span>
+                            <p>Mike DE GUN?</p>
+                        </div>
+                    </div>
+                    <span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
+                </div>
+                <div class="card-body msg_card_body" id="messages">
+
+
+                </div>
+                <div class="card-footer">
+                    {{ form_start(form) }}
+                    <div class="input-group">
+
+                        {{ form_widget(form.message) }}
+                        <div class="input-group-append">
+                            {{ form_widget(form.submit) }}
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('assets/dist/js/myFunction.js') }}"></script>
+    <script>
+        window.onload = function () {
+            NotifServer();
+        };
+
+        function NotifServer() {
+            let websocket_server = new WebSocket("ws://localhost:8080");
+
+            websocket_server.onopen = function () {
+                websocket_server.send(
+                    JSON.stringify({
+                        'type': 'socket',
+                        'user_id':{{ app.user.id }}
+                    })
+                );
+            };
+
+            websocket_server.onerror = function (error) {
+                $('#messages').append('<p> >>> Error...</p>');
+            };
+
+            websocket_server.onmessage = function (event) {
+                var json = JSON.parse(event.data);
+                switch (json.type) {
+                    case 'chat':
+                        $('#messages').append(json.msg);
+                        break;
+                }
+
+            };
+            $('#chat_message').on('keyup', function (e) {
+                if (e.keyCode == 13 && !e.shiftKey) {
+                    sendMessage(websocket_server);
+                }
+
+
+            });
+
+            document.forms["chat"].onsubmit = function (event) {
+                event.preventDefault();
+                sendMessage(websocket_server)
+            }
+        }
+
+        function sendMessage(websocket_server) {
+            var chat_msg = $('#chat_message').val();
+            websocket_server.send(
+                JSON.stringify({
+                    'type': 'chat',
+                    'user_id':{{ app.user.id }},
+                    'chat_msg': chat_msg
+                })
+            );
+            $('#chat_message').clearValue();
+        }
+    </script>
+{% endblock %}

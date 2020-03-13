@@ -6,6 +6,10 @@
 
 
    <style>
+      .item_icon {
+         align-items:center;
+         justify-content: center;
+      }
       .btn-w-h-250{
          width: 230px;
          height: 230px;
@@ -42,6 +46,64 @@
 
 
 {% block body %}
+   <div class="row">
+      <!-- Column -->
+      <div class="col-lg-3 col-md-6">
+         <div class="card">
+            <div class="card-body">
+               <div class="d-flex no-block">
+                  <div class="round align-self-center round-success d-flex item_icon"><i class="ti-clipboard"></i></div>
+                  <div class="m-l-10 align-self-center">
+                     <h3 class="m-b-0">{{ params.tasks }}</h3>
+                     <h5 class="text-muted m-b-0">{% trans %}Tasks today{% endtrans %}</h5></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Column -->
+      <!-- Column -->
+      <div class="col-lg-3 col-md-6">
+         <div class="card">
+            <div class="card-body">
+               <div class="d-flex no-block">
+                  <div class="round align-self-center round-info d-flex item_icon"><i class="ti-user"></i></div>
+                  <div class="m-l-10 align-self-center">
+                     <h3 class="m-b-0">{{ params.clients }}</h3>
+                     <h5 class="text-muted m-b-0">{% trans %}Clients{% endtrans %}</h5></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Column -->
+      <!-- Column -->
+      <div class="col-lg-3 col-md-6">
+         <div class="card">
+            <div class="card-body">
+               <div class="d-flex no-block">
+                  <div class="round align-self-center round-danger d-flex item_icon"><i class="ti-calendar"></i></div>
+                  <div class="m-l-10 align-self-center">
+                     <h3 class="m-b-0">{{ params.projects }}</h3>
+                     <h5 class="text-muted m-b-0">{% trans %}Projects{% endtrans %}</h5></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Column -->
+      <!-- Column -->
+      <div class="col-lg-3 col-md-6">
+         <div class="card">
+            <div class="card-body">
+               <div class="d-flex no-block">
+                  <div class="round align-self-center round-success d-flex item_icon"><i class="ti-crown"></i></div>
+                  <div class="m-l-10 align-self-center">
+                     <h3 class="m-b-0">{{ params.users }}</h3>
+                     <h5 class="text-muted m-b-0">{% trans %}Users{% endtrans %}</h5></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Column -->
+   </div>
    <div class="row p-t-30">
       <div class="col-12">
          <div class="row p-10">
@@ -49,7 +111,7 @@
                <a class="btn waves-effect waves-light btn-outline-info btn_span" href="{{ path('task_add') }}"  >
                   <i class="font-10-em ti-list"></i>
                   <span class="btn-secondary__name">
-                                    Zadania
+                                    {% trans %}Tasks{% endtrans %}
                                 </span>
                </a>
             </div>
@@ -57,7 +119,7 @@
                <a class="btn waves-effect waves-light btn-outline-info btn_span" href="{{ path('users_index') }}"  >
                   <i class="font-10-em icon-people"></i>
                   <span class="btn-secondary__name">
-                                    Zespol
+                                    {% trans %}Team{% endtrans %}
                                 </span>
                </a>
             </div>
@@ -68,7 +130,7 @@
                <a class="btn waves-effect waves-light btn-outline-info btn_span" href="{{ path('projects_index') }}"  >
                   <i class="font-10-em ti-folder"></i>
                   <span class="btn-secondary__name">
-                                    Projekty
+                                    {% trans %}Projects{% endtrans %}
                                 </span>
                </a>
             </div>
@@ -76,7 +138,7 @@
                <a class="btn waves-effect waves-light btn-outline-info btn_span" href="{{ path('clients_index') }}"  >
                   <i class="font-10-em ti-user"></i>
                   <span class="btn-secondary__name">
-                                    Klienci
+                                    {% trans %}Clients{% endtrans %}
                                 </span>
                </a>
             </div>

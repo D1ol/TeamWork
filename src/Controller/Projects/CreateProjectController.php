@@ -12,6 +12,11 @@ use App\Form\Projects\AddProjectType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class CreateProjectController
+ * @package App\Controller\Projects
+ * @Route("/{_locale}", defaults={"_locale" = "en"}, requirements={"_locale" = "en|pl"})
+ */
 class CreateProjectController extends AdvancedAbstractController implements CreateProjectResponder
 {
     /**

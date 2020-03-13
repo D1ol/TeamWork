@@ -8,13 +8,13 @@
 
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h4 class="text-themecolor">New user</h4>
+            <h4 class="text-themecolor">{% trans %}New user{% endtrans %}</h4>
         </div>
         <div class="col-md-7 align-self-center text-right">
             <div class="d-flex justify-content-end align-items-center">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ path('dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item active">New</li>
+                    <li class="breadcrumb-item"><a href="{{ path('dashboard', {'_locale':app.request.get('_locale')}) }}">{% trans %}Home{% endtrans %}</a></li>
+                    <li class="breadcrumb-item active">{% trans %}New{% endtrans %}</li>
                 </ol>
             </div>
         </div>

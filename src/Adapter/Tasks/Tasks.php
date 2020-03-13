@@ -26,4 +26,12 @@ class Tasks implements TasksInterface
     {
        return $this->manager->getRepository('App:Tasks\Task')->findOneBy(array('idUser' => $idUser, 'dateEnd' => null));
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function findCountTasksToday()
+    {
+        return $this->manager->getRepository(Task::class)->findTasksToday();
+    }
 }

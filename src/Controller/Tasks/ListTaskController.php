@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class ListTaskController
  * @package App\Controller\Tasks
- * @Route("/tasks")
+ * @Route("/{_locale}/tasks", defaults={"_locale" = "en"}, requirements={"_locale" = "en|pl"})
  */
 class ListTaskController extends AdvancedAbstractController
 {

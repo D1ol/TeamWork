@@ -58,6 +58,10 @@ services:
         arguments: ["@doctrine.orm.entity_manager"]
         public: true
 
+    App\Adapter\Tasks\Tasks:
+        arguments:
+            - "@doctrine.orm.entity_manager"
+
     Tasks:
         class: App\Adapter\Tasks\Tasks
         arguments: ["@doctrine.orm.entity_manager"]
@@ -100,6 +104,17 @@ services:
     TasksQuery:
         class: App\Adapter\Tasks\ReadModel\TasksQuery
         arguments: ["@doctrine.dbal.default_connection"]
+
+    ReportsQuery:
+        class: App\Adapter\Reports\ReadModel\ReportsQuery
+        arguments:
+            - "@doctrine.dbal.default_connection"
+
+
+    App\Entity\Reports\UseCase\GenerateMonthReport:
+        arguments:
+            - "@ReportsQuery"
+            - "@application_transaction"
 
 #    read_model.clients_query:
 #        class: App\Adapter\Clients\ReadModel

@@ -12,7 +12,7 @@
 
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h4 class="text-themecolor">Profile</h4>
+            <h4 class="text-themecolor">{% trans %}Profile{% endtrans %}</h4>
         </div>
         <div class="col-md-7 align-self-center text-right">
             <div class="d-flex justify-content-end align-items-center">
@@ -37,7 +37,7 @@
                             <img src="{{ asset('uploads/avatar/default.jpg') }}" class="img-circle" width="150">
                         {% endif %}
                         <h4 class="card-title m-t-10">{{ user.name }} {{ user.surname }}</h4>
-                        <h6 class="card-subtitle">Accoubts Manager Amix corp</h6>
+                        <h6 class="card-subtitle">{% trans %}Accoubts Manager Amix corp{% endtrans %}</h6>
                         <div class="row text-center justify-content-md-center">
                             <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-people"></i> <font class="font-medium">254</font></a></div>
                             <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-picture"></i> <font class="font-medium">54</font></a></div>
@@ -46,8 +46,8 @@
                 </div>
                 <div>
                     <hr> </div>
-                <div class="card-body"> <small class="text-muted">Email address </small>
-                    <h6>{{user.email}}</h6> <small class="text-muted p-t-30 db">Phone</small>
+                <div class="card-body"> <small class="text-muted">{% trans %}Email address{% endtrans %} </small>
+                    <h6>{{user.email}}</h6> <small class="text-muted p-t-30 db">{% trans %}Phone{% endtrans %}</small>
                     <h6>{{user.phone}}</h6>
                 </div>
             </div>
@@ -59,8 +59,8 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs profile-tab" role="tablist">
 
-                    <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#settings" role="tab">Settings</a> </li>
-                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#photo" role="tab">Photo</a> </li>
+                    <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#settings" role="tab">{% trans %}Settings{% endtrans %}</a> </li>
+                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#photo" role="tab">{% trans %}Photo{% endtrans %}</a> </li>
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content">

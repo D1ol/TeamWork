@@ -10926,14 +10926,29 @@ Main sidebar
 /*******************
 use profile section
 ******************/
-.user-pro {
-  margin-top: 20px; }
-  .user-pro a img {
-    width: 30px;
-    margin-bottom: 10px; }
-  .user-pro a span {
-    display: block; }
+/*.user-pro {*/
+/*  margin-top: 20px; }*/
+/*  .user-pro a img {*/
+/*    width: 30px;*/
+/*    margin-bottom: 10px; }*/
+/*  .user-pro a span {*/
+/*    display: block; }*/
 
+.user-profile {
+  margin-top: 20px; }
+.user-profile .u-dropdown {
+  display: block;
+  text-align: center; }
+.user-profile .user-pro-body img {
+  width: 50px;
+  display: block;
+  margin: 0 auto 10px; }
+.user-profile .dropdown-menu {
+  right: 0;
+  width: 180px;
+  left: 0;
+  top: 20px !important;
+  margin: 0 auto; }
 /*******************
 sidebar navigation
 ******************/
