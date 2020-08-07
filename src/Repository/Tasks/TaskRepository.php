@@ -4,7 +4,7 @@ namespace App\Repository\Tasks;
 
 use App\Entity\Tasks\Task;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use \Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
  * @method Task|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,7 +14,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class TaskRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Task::class);
     }

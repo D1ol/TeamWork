@@ -7,12 +7,13 @@ use App\Entity\Tasks\Task;
 use App\Entity\Tasks\Tasks as TasksInterface;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 class Tasks implements TasksInterface
 {
     private $manager;
 
-    public function __construct(ObjectManager $objectManager)
+    public function __construct(EntityManagerInterface $objectManager)
     {
         $this->manager = $objectManager;
     }

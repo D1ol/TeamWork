@@ -45,7 +45,7 @@ services:
 
     Users:
         class: App\Adapter\Users\Users
-        arguments: ["@doctrine.orm.entity_manager"]
+        arguments: ["@doctrine.orm.default_entity_manager"]
         public: true
 
     Clients:

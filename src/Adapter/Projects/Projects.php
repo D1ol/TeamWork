@@ -6,12 +6,13 @@ namespace App\Adapter\Projects;
 use App\Entity\Projects\Project;
 use App\Entity\Projects\Projects as ProjectsInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 class Projects implements ProjectsInterface
 {
     private $manager;
 
-    public function __construct(ObjectManager $objectManager)
+    public function __construct(EntityManagerInterface $objectManager)
     {
         $this->manager = $objectManager;
     }
